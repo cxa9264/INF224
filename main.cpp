@@ -48,6 +48,10 @@ void testTable() {
         "\"/Users/hugo/Library/Mobile Documents/com~apple~CloudDocs/TELECOM/INF224/TP/32991_1633696598454270.mp4\""
     );
 
+    const VideoPtr video = dynamic_pointer_cast<Video>(table->findMultimedia("video1"));
+
+    video->show();
+
     // table->showMedia("video1");
     // table->showMedia("Photo 1");
 

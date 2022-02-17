@@ -3,10 +3,10 @@
 #include <map>
 
 #include "Base.h"
+#include "Film.h"
 #include "Group.h"
 #include "Photo.h"
 #include "Video.h"
-#include "Film.h"
 
 class Table {
    private:
@@ -21,18 +21,18 @@ class Table {
                 const int duration_ = 0, const int durations_[] = nullptr,
                 const int numberOfChapters_ = 0);
     const BasePtr findMultimedia(const string) const;
-    const Group * findGroup(const string) const;
+    const Group *findGroup(const string) const;
     bool findMultimediaDisplay(const string) const;
     bool findGroupDisplay(const string) const;
     bool showMedia(const string) const;
-}; 
-
+};
 
 template <typename T>
-bool Table::create(const string name_, const string path_, const int longtitude_,
-            const int latitude_, const int duration_,
-            const int durations_[], const int numberOfChapters_) {
-    T* multimediaObject = new T();
+bool Table::create(const string name_, const string path_,
+                   const int longtitude_, const int latitude_,
+                   const int duration_, const int durations_[],
+                   const int numberOfChapters_) {
+    T *multimediaObject = new T();
     if (Photo *p = dynamic_cast<Photo *>(multimediaObject)) {
         PhotoPtr photo(new Photo(name_, path_, longtitude_, latitude_));
         multimedias[name_] = photo;
