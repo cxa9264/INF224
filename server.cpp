@@ -1,22 +1,56 @@
 #include <string>
 #include <iostream>
+#include <sstream>
+#include <map>
 #include "tcpserver/tcpserver.h"
 #include "server.h"
+#include "Table.h"
 
 #define PORT 3331
 
 using namespace std;
+typedef map<string, function<bool(const string, ostream &)> > InstMap;
+
+class RequestProcessor {
+private:
+    InstMap instructions;
+public:
+    RequestProcessor();
+    bool requestProcessing(string const &, string &) const;
+};
+
+RequestProcessor::RequestProcessor() {
+    instructions["findMedia"] = Table::findMultimediaDisplay;
+    instructions["findGroup"] = Table::findGroupDisplay;
+    instructions["play"] = Table::showMedia;
+}
+
+bool RequestProcessor::requestProcessing(string const &request, string &response) const {
+
+    stringstream ssRequest(request);
+    
+    string instruction, name;
+    ssRequest >> instruction >> name;
+
+    InstMap::const_iterator it = instructions.find(instruction);
+    if (it != instructions.end()) {
+        stringstream ssResponse;
+        bool stat = it->second(name, ssResponse);
+        if (stat) {
+            response = ssResponse.str();
+        }
+    } else {
+        return false;
+    }
+}
 
 int startServer() {
     // create TCP server
+    RequestProcessor requestProcessor;
+
     TCPServer *server = 
         new TCPServer([&](string const &request, string &response){
-            // the request sent by the client to the server
-            cout << "request: " << request << endl;
-            // the response that the server sends back to the client
-            response = "RECEIVED: " + request;
-            // return false would close the connecytion with the client
-            return true;
+            return requestProcessor.requestProcessing(reqeust, response);
         });
     
     // start loop

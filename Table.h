@@ -22,9 +22,9 @@ class Table {
                 const int numberOfChapters_ = 0);
     const BasePtr findMultimedia(const string) const;
     const Group *findGroup(const string) const;
-    bool findMultimediaDisplay(const string) const;
-    bool findGroupDisplay(const string) const;
-    bool showMedia(const string) const;
+    bool findMultimediaDisplay(const string, ostream &os) const;
+    bool findGroupDisplay(const string, ostream &os) const;
+    bool showMedia(const string, ostream &os) const;
 };
 
 template <typename T>

@@ -33,7 +33,7 @@ void Base::setPath(string _path) {
 void Base::display(ostream& os) const {
     os
     << "name: " << name
-    << endl
+    << " "
     << "path: " << path 
-    << endl;
+    << " ";
 }

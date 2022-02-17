@@ -39,13 +39,13 @@ int Photo::getLatitude() const {
 void Photo::display(ostream& os) const {
     os
     << "name: " << name
-    << endl
+    << " "
     << "path: " << path
-    << endl
+    << " "
     << "longtitude: " << longtitude
-    << endl
+    << " "
     << "latitude: " << latitude
-    << endl;
+    << " ";
 }
 
 void Photo::show() const {

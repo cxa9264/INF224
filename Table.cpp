@@ -6,7 +6,7 @@
 
 Table::Table() {}
 
-bool Table::showMedia(const string name) const {
+bool Table::showMedia(const string name, ostream &os=cout) const {
     std::map<string, BasePtr>::const_iterator it = multimedias.find(name);
     if (it != multimedias.end()) {
         it->second->show();
@@ -15,19 +15,19 @@ bool Table::showMedia(const string name) const {
     return false;
 }
 
-bool Table::findMultimediaDisplay(const string name) const {
+bool Table::findMultimediaDisplay(const string name, ostream &os) const {
     std::map<string, BasePtr>::const_iterator it = multimedias.find(name);
     if (it != multimedias.end()) {
-        it->second->display(cout);
+        it->second->display(os);
         return true;
     }
     return false;
 }
 
-bool Table::findGroupDisplay(const string name) const {
+bool Table::findGroupDisplay(const string name, ostream &os) const {
     std::map<string, Group *>::const_iterator it = groups.find(name);
     if (it != groups.end()) {
-        it->second->display(cout);
+        it->second->display(os);
         return true;
     }
     return false;

@@ -13,6 +13,7 @@
 
 using namespace std;
 
+int startServer();
 
 void testFilm() {
     //@breif: test encapsulation of class Fill
@@ -95,7 +96,9 @@ int main(int argc, const char* argv[])
 
     // cout << 'f' << endl;
 
-    testTable();
+    // testTable();
+
+    startServer();
 
     return 0;
 }
