@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "TP_1bfd123"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "UserInterface.Main",
+            "projectName": "TP_1bfd123"
+        },
+        {
             "name": "g++ - 生成和调试活动文件",
             "type": "cppdbg",
             "request": "launch",
