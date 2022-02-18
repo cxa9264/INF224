@@ -22,9 +22,9 @@ void Video::setDuration(int _duration) { duration = _duration; }
 int Video::getDuration() const { return duration; }
 
 void Video::display(ostream& os) const {
-    os << "name: " << name << " "
-       << "path: " << path << " "
-       << "duration: " << duration << " ";
+    os << "name: " << name << "行"
+       << "path: " << path << "行"
+       << "duration: " << duration << "行";
 }
 
 void Video::show() const {

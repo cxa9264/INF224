@@ -31,9 +31,12 @@ bool RequestProcessor::requestProcessing(string const &request, string &response
 
     stringstream ssRequest(request);
     
-    string instruction, name;
+    string instruction, name = "", buffer;
     ssRequest >> instruction >> name;
-
+    while (ssRequest >> buffer) {
+        name = name + " " + buffer;
+    }
+    
     InstMap::const_iterator it = instructions.find(instruction);
 
     if (it != instructions.end()) {

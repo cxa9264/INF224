@@ -71,11 +71,11 @@ int Film::getNumberOfChapters() const {
 
 
 void Film::display(ostream& os) const {
-    os << "name: " << name << " "
-       << "path: " << path << " "
-       << "number of chapters: " << numberOfChapters << " ";
+    os << "name: " << name << "行"
+       << "path: " << path << "行"
+       << "number of chapters: " << numberOfChapters << "行";
     for (int i = 0; i < numberOfChapters; i++) {
-        os << "Duration of chapter " << i + 1 << ": " << durations[i] << " ";
+        os << "Duration of chapter " << i + 1 << ": " << durations[i] << "行";
     }
 }
 #define FILM
