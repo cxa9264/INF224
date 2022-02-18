@@ -9,20 +9,22 @@
 #define PORT 3331
 
 using namespace std;
-typedef map<string, function<bool(const string, ostream &)> > InstMap;
+
+typedef map<string, bool (Table::*)(const string, ostream &) const> InstMap;
 
 class RequestProcessor {
 private:
     InstMap instructions;
+    const Table *table{};
 public:
-    RequestProcessor();
+    RequestProcessor(const Table *table);
     bool requestProcessing(string const &, string &) const;
 };
 
-RequestProcessor::RequestProcessor() {
-    instructions["findMedia"] = Table::findMultimediaDisplay;
-    instructions["findGroup"] = Table::findGroupDisplay;
-    instructions["play"] = Table::showMedia;
+RequestProcessor::RequestProcessor(const Table *table_) : table{table_} {
+    instructions["findMedia"] = &Table::findMultimediaDisplay;
+    instructions["findGroup"] = &Table::findGroupDisplay;
+    instructions["play"] = &Table::showMedia;
 }
 
 bool RequestProcessor::requestProcessing(string const &request, string &response) const {
@@ -33,24 +35,29 @@ bool RequestProcessor::requestProcessing(string const &request, string &response
     ssRequest >> instruction >> name;
 
     InstMap::const_iterator it = instructions.find(instruction);
+
     if (it != instructions.end()) {
         stringstream ssResponse;
-        bool stat = it->second(name, ssResponse);
+        bool stat = (table->*(it->second))(name, ssResponse);
+        cout << ssResponse.str();
         if (stat) {
             response = ssResponse.str();
+        } else {
+            response = "Target " + name + " not found!";
         }
     } else {
-        return false;
+        response = "Instruction " + instruction + " not found!";
     }
+    return true;
 }
 
-int startServer() {
+int startServer(const Table *table) {
     // create TCP server
-    RequestProcessor requestProcessor;
+    RequestProcessor requestProcessor(table);
 
     TCPServer *server = 
         new TCPServer([&](string const &request, string &response){
-            return requestProcessor.requestProcessing(reqeust, response);
+            return requestProcessor.requestProcessing(request, response);
         });
     
     // start loop

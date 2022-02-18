@@ -10,20 +10,20 @@
 # Nom du programme
 #
 CLIENT=client
-SERVER=server
+# SERVER=server
 CLISERV=cliserv
 
 #
 # Fichiers sources (NE PAS METTRE les .h ni les .o mais seulement les .cpp)
 #
 CLIENT_SOURCES=client.cpp ccsocket.cpp 
-SERVER_SOURCES=server.cpp tcpserver.cpp ccsocket.cpp 
+# SERVER_SOURCES=server.cpp tcpserver.cpp ccsocket.cpp 
 CLISERV_SOURCES=client.cpp server.cpp tcpserver.cpp ccsocket.cpp Makefile-cliserv
 #
 # Fichiers objets (ne pas modifier, sauf si l'extension n'est pas .cpp)
 #
 CLIENT_OBJETS=${CLIENT_SOURCES:%.cpp=%.o}
-SERVER_OBJETS=${SERVER_SOURCES:%.cpp=%.o}
+# SERVER_OBJETS=${SERVER_SOURCES:%.cpp=%.o}
 
 #
 # Compilateur C++ (suivant les systemes CXX ou CCC)

@@ -10,8 +10,8 @@
 #include <sstream>
 #include "tcpserver.h"
 
+#ifdef SERVER_MAIN
 const int PORT = 3331;
-
 
 int main(int argc, char* argv[])
 {
@@ -43,4 +43,5 @@ int main(int argc, char* argv[])
 
   return 0;
 }
+#endif
 

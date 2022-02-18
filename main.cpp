@@ -13,7 +13,9 @@
 
 using namespace std;
 
-int startServer();
+#define TEST_SERVER
+
+int startServer(const Table *);
 
 void testFilm() {
     //@breif: test encapsulation of class Fill
@@ -98,7 +100,21 @@ int main(int argc, const char* argv[])
 
     // testTable();
 
-    startServer();
+#ifdef TEST_SERVER
+    Table *table = new Table();
+    table->create<Photo>(
+        "Photo 1",
+        "\"/Users/hugo/Library/Mobile Documents/com~apple~CloudDocs/TELECOM/INF224/TP/image.png\"",
+        1920,
+        1080
+    );
+    table->create<Video>(
+        "video1",
+        "\"/Users/hugo/Library/Mobile Documents/com~apple~CloudDocs/TELECOM/INF224/TP/32991_1633696598454270.mp4\""
+    );
+
+    startServer(table);
+#endif
 
     return 0;
 }

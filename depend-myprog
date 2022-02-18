@@ -1,7 +1,0 @@
-Base.o: Base.cpp Base.h
-Video.o: Video.cpp Video.h Base.h
-Photo.o: Photo.cpp Photo.h Base.h
-Film.o: Film.cpp Film.h Video.h Base.h
-Group.o: Group.cpp Group.h Base.h
-Table.o: Table.cpp Table.h Base.h Film.h Video.h Group.h Photo.h
-main.o: main.cpp Base.h Video.h Photo.h Film.h Group.h Table.h
