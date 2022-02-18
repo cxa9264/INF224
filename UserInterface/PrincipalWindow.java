@@ -18,9 +18,11 @@ public class PrincipalWindow extends JFrame {
         mainJTextArea = new JTextArea(10, 10);
         JScrollPane textJScrollPane = new JScrollPane(mainJTextArea);
 
-        JMenu jMenu = new jMenu();
-        JMenuBar jMenuBar = new jMenuBar();
-        jMenu.add(jMenuBar);
+        // create a menu
+        JMenuBar jMenuBar = new JMenuBar();
+        JMenu jMenu = new JMenu("Menu");
+        JToolBar jToolBar = new JToolBar();
+        jMenuBar.add(jMenu);
 
         // add buttons to jpanel
         southButtonsJPanel.add(addTextJButton1);
@@ -36,6 +38,7 @@ public class PrincipalWindow extends JFrame {
         // add to jframe
         add(textJScrollPane, BorderLayout.CENTER);
         add(southButtonsJPanel, BorderLayout.SOUTH);
+        
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
