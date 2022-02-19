@@ -1,7 +1,4 @@
-#ifndef STRING
 #include <string>
-#define STRING
-#endif
 #include "Video.h"
 
 using namespace std;
@@ -22,9 +19,9 @@ void Video::setDuration(int _duration) { duration = _duration; }
 int Video::getDuration() const { return duration; }
 
 void Video::display(ostream& os) const {
-    os << "name: " << name << "行"
-       << "path: " << path << "行"
-       << "duration: " << duration << "行";
+    os << "name: " << name << endl
+       << "path: " << path << endl
+       << "duration: " << duration << endl;;
 }
 
 void Video::show() const {
@@ -33,7 +30,13 @@ void Video::show() const {
 }
 
 Video::~Video() {
+#ifdef TEST_SMART_PTR
     cout << "Video object deleted: " << endl;
     display(cout);
     cout << endl;
+#endif
+}
+
+string Video::getClassName() const {
+    return "Video";
 }

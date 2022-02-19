@@ -10,14 +10,12 @@
 # Nom du programme
 #
 PROG = myprog
-JAVA_PROG = Main
 
 #
 # Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
 #
 SOURCES = Base.cpp Video.cpp Photo.cpp Film.cpp Group.cpp Table.cpp Server.cpp \
 	 tcpserver/tcpserver.cpp tcpserver/ccsocket.cpp main.cpp
-JAVA_SROUCES = ./Main.java ./UserInterface/Client.java ./UserInterface/PrincipalWindow.java
 
 #
 # Fichiers objets (ne pas modifier sauf si l'extension n'est pas .cpp)
@@ -28,16 +26,6 @@ OBJETS = ${SOURCES:%.cpp=%.o}
 # Compilateur C++
 #
 CXX = c++
-
-#
-# Compliateur Java
-#
-JC = javac
-
-#
-# Options du compilateur Java
-#
-JFLAGS = -g
 
 #
 # Options du compilateur C++
@@ -66,28 +54,20 @@ LDLIBS = -lpthread
 #
  
 all: ${PROG}
-	make classes
 
 run: ${PROG}
-	make classes
-	java ${JAVA_PROG} &
 	./${PROG}
 
 ${PROG}: depend-${PROG} ${OBJETS}
 	${CXX} -o $@ ${CXXFLAGS} ${LDFLAGS} ${OBJETS} ${LDLIBS}
 
-classes: $(JAVA_SROUCES:.java=.class)
-
 clean:
 	-@$(RM) *.o depend-${PROG} core 1>/dev/null 2>&1
-	-@$(RM) *.class ./UserInterface/*.class 1>/dev/null 2>&1
-
 clean-all: clean
 	-@$(RM) ${PROG} 1>/dev/null 2>&1
   
 tar:
 	tar cvf ${PROG}.tar.gz ${SOURCES}
-	tar cvf ${JAVA_PROG}.tar.gz ${JAVA_SROUCES}
 
 # Gestion des dependances : creation automatique des dependances en utilisant 
 # l'option -MM de g++ (attention tous les compilateurs n'ont pas cette option)
@@ -101,10 +81,7 @@ depend-${PROG}:
 # Regles implicites
 #
 
-.SUFFIXES: .cpp .cxx .c .java .class
-
-.java.class:
-	$(JC) $(JFLAGS) $*.java
+.SUFFIXES: .cpp .cxx .c
 
 .cpp.o:
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<

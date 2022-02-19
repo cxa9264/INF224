@@ -2,9 +2,11 @@
 #include <iostream>
 #include <sstream>
 #include <map>
+#include <algorithm>
 #include "tcpserver/tcpserver.h"
 #include "server.h"
 #include "Table.h"
+
 
 #define PORT 3331
 
@@ -45,6 +47,7 @@ bool RequestProcessor::requestProcessing(string const &request, string &response
         cout << ssResponse.str();
         if (stat) {
             response = ssResponse.str();
+            replace(response.begin(), response.end(), '\n', '>');
         } else {
             response = "Target " + name + " not found!";
         }

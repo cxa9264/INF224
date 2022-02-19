@@ -4,16 +4,16 @@
 //
 
 #include <iostream>
+
 #include "Base.h"
-#include "Video.h"
-#include "Photo.h"
+#include "Def.h"
 #include "Film.h"
 #include "Group.h"
+#include "Photo.h"
 #include "Table.h"
+#include "Video.h"
 
 using namespace std;
-
-#define TEST_SERVER
 
 int startServer(const Table *);
 
@@ -23,12 +23,9 @@ void testFilm() {
     //@ret: void
 
     int durations[] = {1, 2, 3, 4};
-    Film *film = new Film(
-        "video1",
-        "\"/Users/hugo/Library/Mobile Documents/com~apple~CloudDocs/TELECOM/INF224/TP/32991_1633696598454270.mp4\"",
-        durations,
-        4
-    );
+    Film *film = new Film("video1",
+                          "\"32991_1633696598454270.mp4\"",
+                          durations, 4);
     film->display(cout);
     int num = 0;
     const int *getDuration = film->getDurations(num);
@@ -38,80 +35,28 @@ void testFilm() {
     cout << num << endl;
 }
 
-void testTable() {
-    Table *table = new Table();
-    table->create<Photo>(
-        "Photo 1",
-        "\"/Users/hugo/Library/Mobile Documents/com~apple~CloudDocs/TELECOM/INF224/TP/image.png\"",
-        1920,
-        1080
-    );
-    table->create<Video>(
-        "video1",
-        "\"/Users/hugo/Library/Mobile Documents/com~apple~CloudDocs/TELECOM/INF224/TP/32991_1633696598454270.mp4\""
-    );
+int main(int argc, const char *argv[]) {
+#ifdef TEST_POLYMORPHISM
+    Base *base[2];
+    base[0] = new Photo("Photo 1", "\"image.png\"", 1920, 1080);
+    base[1] = new Video("video1", "\"32991_1633696598454270.mp4\"");
 
-    const VideoPtr video = dynamic_pointer_cast<Video>(table->findMultimedia("video1"));
+    for (int i = 0; i < 2; i++) {
+        base[i]->show();
+    }
 
-    video->show();
+    delete base[0];
+    delete base[1];
+#endif
 
-    // table->showMedia("video1");
-    // table->showMedia("Photo 1");
-
-    delete table;
-}
-
-int main(int argc, const char* argv[])
-{
-    // testFilm();
-
-    // PhotoPtr photo(new Photo(
-    //     "photo1",
-    //     "\"/Users/hugo/Library/Mobile Documents/com~apple~CloudDocs/TELECOM/INF224/TP/image.png\"",
-    //     1920,
-    //     1080
-    // ));
-
-    // VideoPtr video(new Video(
-    //     "video1",
-    //     "\"/Users/hugo/Library/Mobile Documents/com~apple~CloudDocs/TELECOM/INF224/TP/32991_1633696598454270.mp4\""
-    // ));
-
-    // Group *group = new Group("a group");
-    // group->push_back(photo);
-    // group->push_back(video);
-    // group->display(cout);
-    
-    // Group *group2 = new Group("group2");
-    // group2->push_back(PhotoPtr(new Photo(
-    //     "photo3",
-    //     "\"/Users/hugo/Library/Mobile Documents/com~apple~CloudDocs/TELECOM/INF224/TP/image.png\"",
-    //     1920,
-    //     1080
-    // )));
-
-    // group2->display(cout);
-    // group2->pop_back();
-
-    // group->pop_back();
-    // group->pop_back();
-
-    // cout << 'f' << endl;
-
-    // testTable();
+#ifdef TEST_FILM
+    testFilm();
+#endif
 
 #ifdef TEST_SERVER
     Table *table = new Table();
-    table->create<Photo>(
-        "Photo 1",
-        "\"/Users/hugo/Library/Mobile Documents/com~apple~CloudDocs/TELECOM/INF224/TP/image.png\"",
-        1920,
-        1080
-    );
-    table->create<Video>(
-        "video1",
-        "\"/Users/hugo/Library/Mobile Documents/com~apple~CloudDocs/TELECOM/INF224/TP/32991_1633696598454270.mp4\""
-    );
+    table->create<Photo>("Photo 1", "\"image.png\"", 1920, 1080);
+    table->create<Video>("video1", "\"32991_1633696598454270.mp4\"");
 
     startServer(table);
 #endif

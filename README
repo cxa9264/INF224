@@ -1,0 +1,20 @@
+Compiler:
+    make
+
+Etap 1: ...
+
+Etap 2: 
+    Base est la classe de base. Les classes Photo, Video et Film héritent de cette classe.
+
+Etap 3: ...
+
+Etap 4:
+    On déclare une méthodes virtuelles pures (virtual void show() const = 0;). Donc la classe Base ne peux plus instancer.
+
+Etap 5: #define TEST_POLYMORPHISM
+    La propriété caractéristique est polymorphisme.
+    En c++, on crée une tableau de pointeur de classe de base, et on ajoute des objets de sous-classe dans le tableau.
+    Les éléments dans le tableau sont un pointeur vers l'objet Base. En java, il existe que des pointeurs.
+
+Etap 6: #define TEST_FILM
+    

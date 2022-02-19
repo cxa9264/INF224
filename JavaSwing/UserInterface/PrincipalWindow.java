@@ -136,7 +136,7 @@ public class PrincipalWindow extends JFrame {
     }
 
     private void processResponse(String response) {
-        String[] lines = response.split("行");
+        String[] lines = response.split(">");
         for (String line : lines) {
             mainJTextArea.append(line + '\n');
         }

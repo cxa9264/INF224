@@ -1,10 +1,15 @@
+#include <sys/stat.h>
+
 #include "Table.h"
 #include "Photo.h"
 #include "Video.h"
 #include "Group.h"
 #include "Film.h"
+#include "Def.h"
 
-Table::Table() {}
+Table::Table() {
+    mkdir(SERIALIZE_PATH, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+}
 
 bool Table::showMedia(const string name, ostream &os=cout) const {
     std::map<string, BasePtr>::const_iterator it = multimedias.find(name);
@@ -48,3 +53,4 @@ const BasePtr Table::findMultimedia(const string name) const {
     }
     return nullptr;
 }
+

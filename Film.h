@@ -18,8 +18,8 @@ class Film : public Video {
     void setDurations(int[], int);
     void display(ostream&) const override;
     const int* getDurations(int&) const;
-    const int* getDurations() const;
     int getNumberOfChapters() const;
+    string getClassName() const override;
 };
 
 typedef std::shared_ptr<Film> FilmPtr;

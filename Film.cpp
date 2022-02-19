@@ -48,6 +48,10 @@ Film& Film::operator=(const Film& from) {
 Film::~Film() { delete[] durations; }
 
 void Film::setDurations(int _durations[], int num) {
+    // @breif: set duration of each chapter
+    // @param _durations: int[], contains durations of each chapter
+    // @param num: int, number of chapters, same as the length of _durations
+    // @ret: void
     numberOfChapters = num;
     delete durations;
     durations = new int[num];
@@ -57,26 +61,39 @@ void Film::setDurations(int _durations[], int num) {
 }
 
 const int* Film::getDurations(int& num) const {
+    // @breif: get duration of each chapter
+    // @param num: int&, to return the number of chapters
+    // @ret: const int*, constant pointer to durations, containing duration of each chapter
     num = numberOfChapters;
     return durations;
 }
 
-const int* Film::getDurations() const {
-    return durations;
-}
-
 int Film::getNumberOfChapters() const {
+    // @breif: get number of chapters
+    // @param: void
+    // @ret: number of chapters
     return numberOfChapters;
 }
 
 
 void Film::display(ostream& os) const {
-    os << "name: " << name << "行"
-       << "path: " << path << "行"
-       << "number of chapters: " << numberOfChapters << "行";
+    // @breif: show information of film
+    // @param: ostream&, output stream
+    // @ret: void
+    os << "name: " << name << endl
+       << "path: " << path << endl
+       << "number of chapters: " << numberOfChapters << endl;
     for (int i = 0; i < numberOfChapters; i++) {
-        os << "Duration of chapter " << i + 1 << ": " << durations[i] << "行";
+        os << "Duration of chapter " << i + 1 << ": " << durations[i] << endl;
     }
 }
+
+string Film::getClassName() const {
+    // @breif: get class name
+    // @param: void
+    // @ret: string, "Film"
+    return "Film";
+}
+
 #define FILM
 #endif
