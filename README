@@ -4,6 +4,33 @@ Complier java:
     cd JavaSwing
     make
 
+Fichers:
+    Base.h Base.cpp: classe de base
+    Def.h: #define pour choisit quelle partie est compilée
+    Film.h Film.cpp: classe Film
+    Group.h Group.cpp : classe Group
+    main.cpp : main
+    Photo.h Photo.cpp: classe Photo
+    Server.h Server.cpp: serveur
+    Table.h Table.cpp: classe Table
+    Video.h Video.cpp: classe Video
+    tcpserver: contenant des fichier pour serveur
+    Javaswing:
+        Main.java: contenant fonction main pour UI
+        UserInterface:
+            Client.java: classe Client
+            PrincipalWindow.java: générer la fenêtre et traiter la réponse de serveur
+
+
+Deux photos, une vidéo et une groupe est déjà ajouter dans le Table:
+    Nom des photos:
+        w13
+        Photo 1
+    Nom des vidéo:
+        video1
+    Nom des groupes:
+        F1
+
 Etape 1: ...
 
 Etape 2: 
@@ -49,6 +76,19 @@ Etape 11: #define TEST_TABLE; #define DISABLE_CONSTRUCTOR; #define TEST_SERVER
 
 JavaSwing:
     Il existe trois bouttons, un tool bar, un menu dans la fenêtre. On peut taper une instruction dans le textArea et l'envoyer à la serveur en appuyant sur ENTER.
-    Le premier boutton ajoute un mot play dans le textAre et le deuxième ajoute findMedia.
+    Le premier boutton ajoute un mot play dans le textArea et le deuxième ajoute findMedia.
+
+    Les instructions suivant sont définies:
+        findMedia name : chercher un objet Multimédia avec son nom et donner ses informations
+        findGroup name : chercher un group avec son nom et donner ses informations
+        play name : jouer un objet Multimédia
+        deleteGroup name : supprimer un group
+        deleteMedia name : supprimer un objet multimédia
+    
+    Ex.
+        findMedia w13
+        findGroup F1
+        play w13
+        play video1
 
 

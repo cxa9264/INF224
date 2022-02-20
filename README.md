@@ -11,12 +11,8 @@ Complier java:
     cd JavaSwing
     make
 
-Etape 1: ...
-
 Etape 2: 
     Base est la classe de base. Les classes Photo, Video et Film héritent de cette classe.
-
-Etap 3: ...
 
 Etape 4:
     On déclare une méthodes virtuelles pures (virtual void show() const = 0;). Donc la classe Base ne peux plus instancer.
