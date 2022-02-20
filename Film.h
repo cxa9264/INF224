@@ -8,12 +8,24 @@ class Film : public Video {
     int* durations = nullptr;
     int numberOfChapters = 0;
 
-   public:
+#ifdef DISABLE_CONSTRUCTOR
     Film();
     Film(string, string);
     Film(string, string, const int[], int);
     Film(const Film&);
     Film& operator=(const Film&);
+#endif
+   public:
+#ifdef DISABLE_CONSTRUCTOR
+    friend class Table;
+#endif
+#ifndef DISABLE_CONSTRUCTOR
+    Film();
+    Film(string, string);
+    Film(string, string, const int[], int);
+    Film(const Film&);
+    Film& operator=(const Film&);
+#endif
     ~Film();
     void setDurations(int[], int);
     void display(ostream&) const override;

@@ -7,15 +7,15 @@ class Photo : public Base {
 private:
     int longtitude;
     int latitude;
-#ifndef TEST_POLYMORPHISM
+#ifdef DISABLE_CONSTRUCTOR
     Photo();
     Photo(string, string, int, int);
 #endif
 public:
-#ifndef TEST_POLYMORPHISM
+#ifdef DISABLE_CONSTRUCTOR
     friend class Table;
 #endif
-#ifdef TEST_POLYMORPHISM
+#ifndef DISABLE_CONSTRUCTOR
     Photo();
     Photo(string, string, int, int);
 #endif

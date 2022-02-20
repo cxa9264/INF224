@@ -20,11 +20,14 @@ class Table {
                 const int longtitude_ = 0, const int latitude_ = 0,
                 const int duration_ = 0, const int durations_[] = nullptr,
                 const int numberOfChapters_ = 0);
-    const BasePtr findMultimedia(const string) const;
-    const Group *findGroup(const string) const;
+    bool createGroup(const string);
+    BasePtr findMultimedia(const string) const;
+    Group *findGroup(const string) const;
     bool findMultimediaDisplay(const string, ostream &os) const;
     bool findGroupDisplay(const string, ostream &os) const;
-    bool showMedia(const string, ostream &os) const;
+    bool showMedia(const string, ostream &os=cout) const;
+    bool removeMultimedia(const string, ostream &os=cout);
+    bool removeGroup(const string, ostream &os=cout);
 };
 
 template <typename T>
@@ -39,8 +42,6 @@ bool Table::create(const string name_, const string path_,
     } else if (Video *p = dynamic_cast<Video *>(multimediaObject)) {
         VideoPtr video(new Video(name_, path_, duration_));
         multimedias[name_] = video;
-    } else if (Group *p = dynamic_cast<Group *>(multimediaObject)) {
-        groups[name_] = new Group(name_);
     } else if (Film *p = dynamic_cast<Film *>(multimediaObject)) {
         FilmPtr film(new Film(name_, path_, durations_, numberOfChapters_));
         multimedias[name_] = film;

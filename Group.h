@@ -10,11 +10,12 @@ class Group : public std::list<BasePtr> {
     string groupName = "";
 
    public:
+    Group();
     Group(string);
     ~Group();
     string getGrpouName() const;
     void display(ostream& os) const;
-    
+    list<BasePtr>::iterator find(const string);
 };
 #define GROUP
 #endif

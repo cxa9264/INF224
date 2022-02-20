@@ -4,22 +4,23 @@
 #include <string>
 
 #include "Base.h"
+#include "Def.h"
 
 using namespace std;
 
 class Video : public Base {
    protected:
     int duration;
-#ifndef TEST_POLYMORPHISM
+#ifdef DISABLE_CONSTRUCTOR
     Video();
     Video(string, string);
     Video(string, string, int);
 #endif
    public:
-#ifndef TEST_POLYMORPHISM
+#ifdef DISABLE_CONSTRUCTOR
     friend class Table;
 #endif
-#ifdef TEST_POLYMORPHISM
+#ifndef DISABLE_CONSTRUCTOR
     Video();
     Video(string, string);
     Video(string, string, int);

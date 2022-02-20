@@ -14,8 +14,8 @@ public class PrincipalWindow extends JFrame {
 
         JPanel southButtonsJPanel = new JPanel();
 
-        JButton addTextJButton1 = new JButton("Ajouter une ligne");
-        JButton addTextJButton2 = new JButton("Ajouter une autre ligne");
+        JButton addTextJButton1 = new JButton("play");
+        JButton addTextJButton2 = new JButton("findMedia");
         JButton quitJButton = new JButton("Terminer");
         
         mainJTextArea = new JTextArea(10, 10);
@@ -29,8 +29,8 @@ public class PrincipalWindow extends JFrame {
         jMenuBar.add(jMenu);
 
         // bind listener to menu items
-        JMenuItem addText1JMenuItem = new JMenuItem("Ajouter une ligne");
-        JMenuItem addText2jMenuItem = new JMenuItem("Ajouter une autre ligne");
+        JMenuItem addText1JMenuItem = new JMenuItem("play");
+        JMenuItem addText2jMenuItem = new JMenuItem("findMedia");
         JMenuItem quitJMenuItem = new JMenuItem("Terminer");
         addText1JMenuItem.addActionListener(new AddText1Listener());
         addText2jMenuItem.addActionListener(new AddText2Listener());
@@ -43,8 +43,8 @@ public class PrincipalWindow extends JFrame {
 
         // create tool bar
         JToolBar jToolBar = new JToolBar();
-        JButton addTextToolBarJButton1 = new JButton("Ajouter une ligne");
-        JButton addTextToolBarJButton2 = new JButton("Ajouter une ligne");
+        JButton addTextToolBarJButton1 = new JButton("play");
+        JButton addTextToolBarJButton2 = new JButton("FindMedia");
         JButton quitToolBarJButton = new JButton("Terminer");
         addTextToolBarJButton1.addActionListener(new AddText1Listener());
         addTextToolBarJButton2.addActionListener(new AddText2Listener());
@@ -88,14 +88,14 @@ public class PrincipalWindow extends JFrame {
     class AddText1Listener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            mainJTextArea.append("INF224\n");
+            mainJTextArea.append("play ");
         }
     }
 
     class AddText2Listener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            mainJTextArea.append("Travaux Pratiques Java/Swing\n");
+            mainJTextArea.append("findMedia ");
         }
     }
 
@@ -109,6 +109,9 @@ public class PrincipalWindow extends JFrame {
     }
 
     private String getLastLine() {
+        //
+        // get last line of text area
+        //
         String text = mainJTextArea.getText();
         String[] lines = text.split("\n");
         return lines[lines.length-1];

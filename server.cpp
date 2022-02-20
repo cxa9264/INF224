@@ -12,21 +12,25 @@
 
 using namespace std;
 
-typedef map<string, bool (Table::*)(const string, ostream &) const> InstMap;
+typedef map<string, bool (Table::*)(const string, ostream &) const> InstConstMap;
+typedef map<string, bool (Table::*)(const string, ostream &)> InstEditMap;
 
 class RequestProcessor {
 private:
-    InstMap instructions;
-    const Table *table{};
+    InstConstMap constInstructions;
+    InstEditMap editInstructions;
+    Table *table{};
 public:
-    RequestProcessor(const Table *table);
+    RequestProcessor(Table *table);
     bool requestProcessing(string const &, string &) const;
 };
 
-RequestProcessor::RequestProcessor(const Table *table_) : table{table_} {
-    instructions["findMedia"] = &Table::findMultimediaDisplay;
-    instructions["findGroup"] = &Table::findGroupDisplay;
-    instructions["play"] = &Table::showMedia;
+RequestProcessor::RequestProcessor(Table *table_) : table{table_} {
+    constInstructions["findMedia"] = &Table::findMultimediaDisplay;
+    constInstructions["findGroup"] = &Table::findGroupDisplay;
+    constInstructions["play"] = &Table::showMedia;
+    editInstructions["deleteGroup"] = &Table::removeGroup;
+    editInstructions["deleteMedia"] = &Table::removeMultimedia;
 }
 
 bool RequestProcessor::requestProcessing(string const &request, string &response) const {
@@ -39,11 +43,22 @@ bool RequestProcessor::requestProcessing(string const &request, string &response
         name = name + " " + buffer;
     }
     
-    InstMap::const_iterator it = instructions.find(instruction);
+    InstConstMap::const_iterator itConst = constInstructions.find(instruction);
+    InstEditMap::const_iterator itEdit = editInstructions.find(instruction);
 
-    if (it != instructions.end()) {
+    if (itConst != constInstructions.end()) {
         stringstream ssResponse;
-        bool stat = (table->*(it->second))(name, ssResponse);
+        bool stat = (table->*(itConst->second))(name, ssResponse);
+        cout << ssResponse.str();
+        if (stat) {
+            response = ssResponse.str();
+            replace(response.begin(), response.end(), '\n', '>');
+        } else {
+            response = "Target " + name + " not found!";
+        }
+    } else if (itEdit != editInstructions.end()) {
+        stringstream ssResponse;
+        bool stat = (table->*(itEdit->second))(name, ssResponse);
         cout << ssResponse.str();
         if (stat) {
             response = ssResponse.str();
@@ -57,7 +72,7 @@ bool RequestProcessor::requestProcessing(string const &request, string &response
     return true;
 }
 
-int startServer(const Table *table) {
+int startServer(Table *table) {
     // create TCP server
     RequestProcessor requestProcessor(table);
 

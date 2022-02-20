@@ -1,11 +1,11 @@
-Base.o: Base.cpp Base.h
-Video.o: Video.cpp Video.h Base.h
+Base.o: Base.cpp Base.h Def.h
+Video.o: Video.cpp Video.h Base.h Def.h
 Photo.o: Photo.cpp Photo.h Base.h Def.h
-Film.o: Film.cpp Film.h Video.h Base.h
-Group.o: Group.cpp Group.h Base.h
-Table.o: Table.cpp Table.h Base.h Film.h Video.h Group.h Photo.h Def.h
+Film.o: Film.cpp Film.h Video.h Base.h Def.h
+Group.o: Group.cpp Group.h Base.h Def.h
+Table.o: Table.cpp Table.h Base.h Def.h Film.h Video.h Group.h Photo.h
 Server.o: Server.cpp tcpserver/tcpserver.h tcpserver/ccsocket.h server.h \
-  Table.h Base.h Film.h Video.h Group.h Photo.h
+  Table.h Base.h Def.h Film.h Video.h Group.h Photo.h
 tcpserver.o: tcpserver/tcpserver.cpp tcpserver/tcpserver.h \
   tcpserver/ccsocket.h
 ccsocket.o: tcpserver/ccsocket.cpp tcpserver/ccsocket.h
