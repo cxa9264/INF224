@@ -135,6 +135,8 @@ public class PrincipalWindow extends JFrame {
         String response = client.send(request);
         processResponse(response);
 
+        client.close();
+
         return;
     }
 

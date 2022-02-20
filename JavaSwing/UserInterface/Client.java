@@ -116,5 +116,14 @@ public class Client
       return null;
     }
   }
+
+  public boolean close() {
+    try {
+      sock.close();
+    } catch (IOException e) {
+      return false;
+    }
+    return true;
+  }
 }
 
